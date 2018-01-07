@@ -1,0 +1,21 @@
+* B64 (Base64 encoder / decoder)
+  This is an example project which used [[http://cython.org/][Cython]] to interface with C
+  code.  Base64 algorithm is implemented in C, command-line interface
+  is implemented in Python.
+
+* Installing
+  #+BEGIN_SRC sh
+    python3.6 -m pip install git+https://github.com/wvxvw/b64.git@master
+  #+END_SRC
+
+* Running
+
+** Encoding
+   #+BEGIN_SRC sh
+     b64 input.file output.file
+   #+END_SRC
+
+** Decoding
+   #+BEGIN_SRC sh
+     b64 -d input.file output.file
+   #+END_SRC

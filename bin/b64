@@ -1,0 +1,29 @@
+#!/usr/bin/env python3.6
+# -*- mode: python; coding: utf-8 -*-
+
+from argparse import ArgumentParser
+from mmap import mmap, ACCESS_READ
+
+from b64 import encode_file
+
+parser = ArgumentParser('Decode or encode using base64 coding')
+
+parser.add_argument(
+    '-d', '--decode',
+    default=False,
+    action='store_true',
+    help='If set, decode the file rather than encode',
+)
+parser.add_argument('fin', default='-', nargs='?', help='File to read')
+parser.add_argument('fout', default='-', nargs='?', help='File to write')
+
+args = parser.parse_args()
+
+if not args.decode:
+    fin = None
+    if args.fin == '-':
+        fin = sys.stdin.buffer.raw
+    else:
+        with open(args.fin, 'rb') as f:
+            fin = mmap(f.fileno(), 0, access=ACCESS_READ)
+    encode_file(fin, args.fout)
